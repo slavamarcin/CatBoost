@@ -37,12 +37,15 @@ class Model:
     def loadData(self):
         import pandas
       #  excel_data_df = pandas.read_csv('mainDataset.csv', on_bad_lines='skip', delimiter=";")
-        data = np.genfromtxt("mainDataset2.csv",delimiter=';',encoding = 'UTF-8', dtype=None)
+        data = np.genfromtxt("NEWDATA3.csv",delimiter=';',encoding = 'UTF-8', dtype=None)
         data = data[1:,::]
         datax = np.delete(data, 8, 1)[::, ::]
         datay = data[::, 8]
         oversample = RandomOverSampler(sampling_strategy='minority')
         X_over, y_over = oversample.fit_resample(datax, datay)
+     #   X_over, y_over = oversample.fit_resample(X_over, y_over)
+     #   X_over, y_over = oversample.fit_resample(X_over, y_over)
+     #   X_over, y_over = oversample.fit_resample(X_over, y_over)
         return train_test_split(X_over,y_over,test_size=0.3)
     def prepare_data(data_train_x,data_train_y,data_test_x,data_test_y):
         '''
@@ -53,7 +56,7 @@ class Model:
         test_y = test_y.reshape(len(test_y))
         test_x = np.delete(test, 8, 1)[::, ::]
         '''
-        cat_features = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 16, 17, 18]
+        cat_features = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,14, 15]
 
         train_dataset = Pool(data=data_train_x,
                              label=data_train_y,
